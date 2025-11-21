@@ -20,7 +20,7 @@ export const getAllNotesSchema = {
 
 export const noteIdSchema = {
   [Segments.PARAMS]: Joi.object({
-    noteId: Joi.string().custom(isValidObjectId, 'ObjectId Validation').required(),
+    noteId: Joi.custom(objectIdValidator).required(),
   }),
 };
 
@@ -38,5 +38,7 @@ export const updateNoteSchema = {
     title: Joi.string().min(1).optional(),
     content: Joi.string().allow('').optional(),
     tag: Joi.string().valid(...TAGS).optional()
-  }).min(1).message('At least one field (title, content, or tag) must be provided')
+  }).min(1).messages({
+    'object.min': 'At least one field (title, content, or tag) must be provided'
+  })
 };
