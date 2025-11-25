@@ -77,7 +77,7 @@ export const refreshUserSession = async (req, res) => {
   });
 };
 
-export const logOutUser = async (req, res) => {
+export const logoutUser = async (req, res) => {
   const { sessionId } = req.cookies;
 
   if (sessionId) {
@@ -86,7 +86,7 @@ export const logOutUser = async (req, res) => {
 
   res.clearCookie("accessToken");
   res.clearCookie("refreshToken");
-  res.clearCookie("sessinId");
+  res.clearCookie("sessionId");
 
-  res.status(204);
+  res.status(204).send();
 };
